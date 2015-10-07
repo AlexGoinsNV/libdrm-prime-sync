@@ -659,6 +659,14 @@ struct drm_prime_handle {
 	__s32 fd;
 };
 
+struct drm_prime_page_flip {
+    __u32 handle;
+    __u32 fb_id;
+    __u32 crtc_id;
+    __u32 flags;
+    __u64 user_data;
+};
+
 #include "drm_mode.h"
 
 #define DRM_IOCTL_BASE			'd'
@@ -718,6 +726,7 @@ struct drm_prime_handle {
 
 #define DRM_IOCTL_PRIME_HANDLE_TO_FD    DRM_IOWR(0x2d, struct drm_prime_handle)
 #define DRM_IOCTL_PRIME_FD_TO_HANDLE    DRM_IOWR(0x2e, struct drm_prime_handle)
+#define DRM_IOCTL_PRIME_PAGE_FLIP       DRM_IOWR(0x2f, struct drm_prime_page_flip)
 
 #define DRM_IOCTL_AGP_ACQUIRE		DRM_IO(  0x30)
 #define DRM_IOCTL_AGP_RELEASE		DRM_IO(  0x31)

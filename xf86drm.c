@@ -2760,6 +2760,22 @@ int drmPrimeFDToHandle(int fd, int prime_fd, uint32_t *handle)
 	return 0;
 }
 
+int drmPrimePageFlip(int fd, uint32_t handle,
+		     uint32_t crtc_id, uint32_t fb_id,
+		     uint32_t flags, void *user_data)
+{
+	struct drm_prime_page_flip args;
+
+	memclear(args);
+	args.handle = handle;
+	args.fb_id = fb_id;
+	args.crtc_id = crtc_id;
+	args.flags = flags;
+	args.user_data = (uint64_t)(unsigned long) user_data;
+
+	return drmIoctl(fd, DRM_IOCTL_PRIME_PAGE_FLIP, &args);
+}
+
 static char *drmGetMinorNameForFD(int fd, int type)
 {
 #ifdef __linux__
